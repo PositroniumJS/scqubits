@@ -278,7 +278,7 @@ class ZeroPi(base.QubitBaseClass, serializers.Serializable, NoisyZeroPi):
         return self.grid.pt_count * (2 * self.ncut + 1)
 
     def potential(self, phi: ndarray, theta: ndarray) -> ndarray:
-        """
+        r"""
         Returns
         -------
             value of the potential energy evaluated at :math:`\phi`, :math:`\theta`
@@ -807,7 +807,7 @@ class ZeroPi(base.QubitBaseClass, serializers.Serializable, NoisyZeroPi):
         zero_calibrate: bool = True,
         **kwargs,
     ) -> Tuple[Figure, Axes]:
-        """Plots 2d phase-basis wave function.
+        r"""Plots 2d phase-basis wave function.
 
         Parameters
         ----------
@@ -816,7 +816,7 @@ class ZeroPi(base.QubitBaseClass, serializers.Serializable, NoisyZeroPi):
         which:
             index of wave function to be plotted (default value = 0)
         theta_grid:
-            used for setting a custom grid for theta; if None use self._default_grid
+            used for setting a custom grid for :math:`\theta`; if None use self._default_grid
         mode:
             choices as specified in `constants.MODE_FUNC_DICT`
             (default value = 'abs')
