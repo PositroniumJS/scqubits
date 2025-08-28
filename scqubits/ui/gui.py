@@ -11,13 +11,11 @@
 ############################################################################
 
 import math
-
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
-
 from matplotlib.figure import Axes, Figure
 
 import scqubits as scq
@@ -25,7 +23,6 @@ import scqubits.ui.gui_custom_widgets as ui
 import scqubits.ui.gui_defaults as gui_defaults
 import scqubits.ui.gui_navbar as gui_navbar
 import scqubits.utils.misc as utils
-
 from scqubits.core.discretization import Grid1d
 from scqubits.settings import matplotlib_settings
 from scqubits.ui.gui_custom_widgets import flex_column, flex_row
@@ -885,13 +882,21 @@ class GUI:
             value_dict["phi_grid"] = Grid1d(
                 min_val=self.dict_v_ranges["phi"]["min"].num_value,
                 max_val=self.dict_v_ranges["phi"]["max"].num_value,
-                pt_count=self.active_qubit._default_grid.pt_count,
+                pt_count=getattr(
+                    self.active_qubit,
+                    "_default_grid",
+                    getattr(self.active_qubit, "_default_phi_grid"),
+                ).pt_count,
             )
         if isinstance(self.active_qubit, QUBITS_WITH_THETA_GRID):
             value_dict["theta_grid"] = Grid1d(
                 min_val=self.dict_v_ranges["theta"]["min"].num_value,
                 max_val=self.dict_v_ranges["theta"]["max"].num_value,
-                pt_count=self.active_qubit._default_grid.pt_count,
+                pt_count=getattr(
+                    self.active_qubit,
+                    "_default_grid",
+                    getattr(self.active_qubit, "_default_theta_grid"),
+                ).pt_count,
             )
         self.wavefunctions_plot(**value_dict)
 
